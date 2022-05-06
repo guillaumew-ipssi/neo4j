@@ -1,0 +1,28 @@
+version: "3"
+services:
+  neo1:
+    container_name: neo1
+    image: neo4j
+    volumes:
+      - ./neo1/neo4j.conf:/etc/neo4j/neo4j.conf
+      - ./apoc-4.4.0.4-all.jar:/var/lib/neo4j/plugins/apoc-4.4.0.4-all.jar
+    networks:
+      - net1
+
+  neo2:
+    container_name: neo2
+    image: neo4j
+    volumes:
+      - ./neo2/neo4j.conf:/etc/neo4j/neo4j.conf
+      - ./apoc-4.4.0.4-all.jar:/var/lib/neo4j/plugins/apoc-4.4.0.4-all.jar
+    networks:
+      - net1
+
+networks:
+  net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16
+
+    
